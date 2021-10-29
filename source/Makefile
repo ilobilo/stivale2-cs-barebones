@@ -20,11 +20,11 @@ LD = ld.lld
 AS = nasm
 AOT = tysila2
 DOTNET = /usr/share/dotnet/dotnet
+CSC = /usr/share/dotnet/sdk/*/Roslyn/bincore/csc.dll
 
 ASMFLAGS = -f elf64
 AOTFLAGS = --arch x86_64-elf64-tysos -fno-rtti -fno-exceptions
-CSC = /usr/share/dotnet/sdk/*/Roslyn/bincore/csc.dll
-CSCFLAGS = -unsafe -target:exe -platform:x86 -nostdlib /r:$(SOURCEDIR)/mscorlib.dll
+CSCFLAGS = -unsafe -target:exe -platform:x86 -nostdlib /r:/usr/share/tysila2/mscorlib.dll
 
 LDFLAGS = -T $(SOURCEDIR)/linker.ld -m elf_x86_64 -z max-page-size=0x1000
 
