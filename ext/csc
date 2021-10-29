@@ -1,1 +1,0 @@
-/usr/share/dotnet/dotnet /usr/share/dotnet/sdk/*/Roslyn/bincore/csc.dll $@

@@ -19,10 +19,11 @@ XORRISOFLAGS = -as mkisofs -b limine-cd.bin \
 LD = ld.lld
 AS = nasm
 AOT = tysila2
-CSC = csc
+DOTNET = /usr/share/dotnet/dotnet
 
 ASMFLAGS = -f elf64
 AOTFLAGS = --arch x86_64-elf64-tysos -fno-rtti -fno-exceptions
+CSC = /usr/share/dotnet/sdk/*/Roslyn/bincore/csc.dll
 CSCFLAGS = -unsafe -target:exe -platform:x86 -nostdlib /r:$(SOURCEDIR)/mscorlib.dll
 
 LDFLAGS = -T $(SOURCEDIR)/linker.ld -m elf_x86_64 -z max-page-size=0x1000
@@ -41,7 +42,7 @@ bios: $(KERNEL)
 	$(MAKE) clean run-bios
 
 $(KERNEL): $(OBJ)
-	$(CSC) $(CSCFLAGS) $(CSFILES) -out:$(KERNELEXE)
+	$(DOTNET) $(CSC) $(CSCFLAGS) $(CSFILES) -out:$(KERNELEXE)
 	$(AOT) $(AOTFLAGS) $(KERNELEXE) -o $(KERNELO)
 	$(LD) $(LDFLAGS) $(INTERNALLDFLAGS) $(OBJ) $(KERNELO) -o $@
 
