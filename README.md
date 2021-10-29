@@ -3,11 +3,8 @@ Barebones C# kernel using Limine and Stivale2 as bootloader and boot protocol
 
 ## Install CSC on linux
 1. Download and install dotnet 5</br>
-2. Add this line to your ~/.bashrc file:
-   ``export DOTNET_ROOT=/usr/share/dotnet/``</br>
-   (replace /usr/share/dotnet with path where dotnet was installed)
-3. run ``source ~/.bashrc``
-4. Copy csc from ext/ directory of this repo to /bin/
+2. Make sure dotnet is installed in /usr/share/dotnet/ directory
+3. Copy csc from ext/ directory of this repo to /bin/
 
 ## Building
 You need these programs installed to build and run the kernel:
