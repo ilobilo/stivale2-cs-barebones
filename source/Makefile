@@ -23,7 +23,7 @@ CSC = csc
 
 ASMFLAGS = -f elf64
 AOTFLAGS = --arch x86_64-elf64-tysos -fno-rtti -fno-exceptions
-CSCFLAGS = -unsafe -target:exe -platform:x86 /r:$(SOURCEDIR)/mscorlib.dll
+CSCFLAGS = -unsafe -target:exe -platform:x86 -nostdlib /r:$(SOURCEDIR)/mscorlib.dll
 
 LDFLAGS = -T $(SOURCEDIR)/linker.ld -m elf_x86_64 -z max-page-size=0x1000
 
@@ -38,7 +38,7 @@ all: $(KERNEL)
 
 bios: $(KERNEL)
 	$(MAKE) iso
-	$(MAKE) clean run
+	$(MAKE) clean run-bios
 
 $(KERNEL): $(OBJ)
 	$(CSC) $(CSCFLAGS) $(CSFILES) -out:$(KERNELEXE)
