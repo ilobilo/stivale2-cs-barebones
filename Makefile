@@ -1,15 +1,12 @@
 KERNELDIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-all: /bin/csc limine
+all: limine
 	@mkdir -p $(KERNELDIR)/iso_root
 	@$(MAKE) -s -C $(KERNELDIR)/source
 
-bios: /bin/csc limine
+bios: limine
 	@mkdir -p $(KERNELDIR)/iso_root
 	@$(MAKE) -s -C $(KERNELDIR)/source bios
-
-/bin/csc:
-	@cp $(KERNELDIR)/ext/csc /bin/
 
 limine:
 	@git clone https://github.com/limine-bootloader/limine.git --single-branch --branch=latest-binary --depth=1
