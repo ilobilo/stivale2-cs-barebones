@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace Kernel
 {
     public unsafe static class stivale2
@@ -16,9 +18,10 @@ namespace Kernel
             return null;
         }
 
-        public unsafe struct stivale2_anchor
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_anchor
         {
-            public byte* anchor;
+            public fixed byte anchor[15];
             public byte bits;
             public ulong phys_load_addr;
             public ulong phys_bss_start;
@@ -26,13 +29,15 @@ namespace Kernel
             public ulong phys_stivale2hdr;
         }
 
-        public unsafe struct stivale2_tag
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_tag
         {
             public ulong identifier;
             public ulong next;
         }
 
-        public unsafe struct stivale2_header
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_header
         {
             public ulong entry_point;
             public ulong stack;
@@ -41,14 +46,18 @@ namespace Kernel
         }
 
         public static ulong STIVALE2_HEADER_TAG_ANY_VIDEO_ID = 0xc75c9fa92a44c4db;
-        public unsafe struct stivale2_header_tag_any_video
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_header_tag_any_video
         {
             public stivale2_tag tag;
             public ulong preference;
         }
 
         public static ulong STIVALE2_HEADER_TAG_FRAMEBUFFER_ID = 0x3ecc1bc43d0f7971;
-        public unsafe struct stivale2_header_tag_framebuffer
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_header_tag_framebuffer
         {
             public stivale2_tag tag;
             public ushort framebuffer_width;
@@ -59,7 +68,9 @@ namespace Kernel
 
         public static ulong STIVALE2_HEADER_TAG_FB_MTRR_ID = 0x4c7bb07731282e00;
         public static ulong STIVALE2_HEADER_TAG_TERMINAL_ID = 0xa85d499b1823be72;
-        public unsafe struct stivale2_header_tag_terminal
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_header_tag_terminal
         {
             public stivale2_tag tag;
             public ulong flags;
@@ -70,7 +81,9 @@ namespace Kernel
         public static ulong STIVALE2_TERM_CB_BELL = 20;
 
         public static ulong STIVALE2_HEADER_TAG_SMP_ID = 0x1ab015085f3273df;
-        public unsafe struct stivale2_header_tag_smp
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_header_tag_smp
         {
             public stivale2_tag tag;
             public ulong flags;
@@ -81,10 +94,12 @@ namespace Kernel
 
         public static ulong STIVALE2_BOOTLOADER_BRAND_SIZE = 64;
         public static ulong STIVALE2_BOOTLOADER_VERSION_SIZE = 64;
-        public unsafe struct stivale2_struct
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_struct
         {
-            public char* bootloader_brand;
-            public char* bootloader_version;
+            public fixed byte bootloader_brand[64];
+            public fixed byte bootloader_version[64];
             public ulong tags;
         }
 
@@ -93,22 +108,27 @@ namespace Kernel
         public static ulong STIVALE2_PMR_EXECUTABLE = ((ulong)1 << 0);
         public static ulong STIVALE2_PMR_WRITABLE = ((ulong)1 << 1);
         public static ulong STIVALE2_PMR_READABLE = ((ulong)1 << 2);
-        public unsafe struct stivale2_pmr
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_pmr
         {
             public ulong _base;
             public ulong length;
             public ulong permissions;
         }
 
-        public unsafe struct stivale2_struct_tag_pmrs
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_struct_tag_pmrs
         {
             public stivale2_tag tag;
             public ulong entries;
-            stivale2_pmr* pmrs;
+            public stivale2_pmr* pmrs;
         }
 
         public static ulong STIVALE2_STRUCT_TAG_CMDLINE_ID = 0xe5e76a1b4597a781;
-        public unsafe struct stivale2_struct_tag_cmdline
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_struct_tag_cmdline
         {
             public stivale2_tag tag;
             public ulong cmdline;
@@ -124,7 +144,9 @@ namespace Kernel
         public static ulong STIVALE2_MMAP_BOOTLOADER_RECLAIMABLE = 0x1000;
         public static ulong STIVALE2_MMAP_KERNEL_AND_MODULES = 0x1001;
         public static ulong STIVALE2_MMAP_FRAMEBUFFER = 0x1002;
-        public unsafe struct stivale2_mmap_entry
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_mmap_entry
         {
             public ulong _base;
             public ulong length;
@@ -132,17 +154,19 @@ namespace Kernel
             public uint unused;
         }
 
-        public unsafe struct stivale2_struct_tag_memmap
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_struct_tag_memmap
         {
             public stivale2_tag tag;
             public ulong entries;
-            stivale2_mmap_entry* memmap;
+            public stivale2_mmap_entry* memmap;
         }
 
         public static ulong STIVALE2_STRUCT_TAG_FRAMEBUFFER_ID = 0x506461d2950408fa;
         public static ulong STIVALE2_FBUF_MMODEL_RGB = 1;
 
-        public unsafe struct stivale2_struct_tag_framebuffer
+        [StructLayout(LayoutKind.Sequential)]
+        public struct stivale2_struct_tag_framebuffer
         {
             public stivale2_tag tag;
             public ulong framebuffer_addr;
@@ -162,16 +186,16 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_EDID_ID = 0x968609d7af96b845;
 
-        public unsafe struct stivale2_struct_tag_edid
+        public struct stivale2_struct_tag_edid
         {
             public stivale2_tag tag;
             public ulong edid_size;
-            public byte* edid_information;
+            public fixed byte edid_information[64];
         };
 
         public static ulong STIVALE2_STRUCT_TAG_TEXTMODE_ID = 0x38d74c23e0dca893;
 
-        public unsafe struct stivale2_struct_tag_textmode
+        public struct stivale2_struct_tag_textmode
         {
             public stivale2_tag tag;
             public ulong address;
@@ -185,7 +209,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_TERMINAL_ID = 0xc2b3f4c3233b0974;
 
-        public unsafe struct stivale2_struct_tag_terminal
+        public struct stivale2_struct_tag_terminal
         {
             public stivale2_tag tag;
             public uint flags;
@@ -199,14 +223,14 @@ namespace Kernel
 
         public static ulong STIVALE2_MODULE_STRING_SIZE = 128;
 
-        public unsafe struct stivale2_module
+        public struct stivale2_module
         {
             public ulong begin;
             public ulong end;
-            public char* _string;
+            public fixed byte _string[64];
         }
 
-        public unsafe struct stivale2_struct_tag_modules
+        public struct stivale2_struct_tag_modules
         {
             public stivale2_tag tag;
             public ulong module_count;
@@ -215,7 +239,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_RSDP_ID = 0x9e1786930a375e78;
 
-        public unsafe struct stivale2_struct_tag_rsdp
+        public struct stivale2_struct_tag_rsdp
         {
             public stivale2_tag tag;
             public ulong rsdp;
@@ -223,7 +247,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_EPOCH_ID = 0x566a7bed888e1407;
 
-        public unsafe struct stivale2_struct_tag_epoch
+        public struct stivale2_struct_tag_epoch
         {
             public stivale2_tag tag;
             public ulong epoch;
@@ -233,7 +257,7 @@ namespace Kernel
 
         public static ulong STIVALE2_FIRMWARE_BIOS = (1 << 0);
 
-        public unsafe struct stivale2_struct_tag_firmware
+        public struct stivale2_struct_tag_firmware
         {
             public stivale2_tag tag;
             public ulong flags;
@@ -241,7 +265,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_EFI_SYSTEM_TABLE_ID = 0x4bc5ec15845b558e;
 
-        public unsafe struct stivale2_struct_tag_efi_system_table
+        public struct stivale2_struct_tag_efi_system_table
         {
             public stivale2_tag tag;
             public ulong system_table;
@@ -249,7 +273,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_KERNEL_FILE_ID = 0xe599d90c2975584a;
 
-        public unsafe struct stivale2_struct_tag_kernel_file
+        public struct stivale2_struct_tag_kernel_file
         {
             public stivale2_tag tag;
             public ulong kernel_file;
@@ -257,7 +281,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_KERNEL_FILE_V2_ID = 0x37c13018a02c6ea2;
 
-        public unsafe struct stivale2_struct_tag_kernel_file_v2
+        public struct stivale2_struct_tag_kernel_file_v2
         {
             public stivale2_tag tag;
             public ulong kernel_file;
@@ -266,7 +290,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_KERNEL_SLIDE_ID = 0xee80847d01506c57;
 
-        public unsafe struct stivale2_struct_tag_kernel_slide
+        public struct stivale2_struct_tag_kernel_slide
         {
             public stivale2_tag tag;
             public ulong kernel_slide;
@@ -274,7 +298,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_SMBIOS_ID = 0x274bd246c62bf7d1;
 
-        public unsafe struct stivale2_struct_tag_smbios
+        public struct stivale2_struct_tag_smbios
         {
             public stivale2_tag tag;
             public ulong flags;
@@ -284,7 +308,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_SMP_ID = 0x34d1d96339647025;
 
-        public unsafe struct stivale2_smp_info
+        public struct stivale2_smp_info
         {
             public uint processor_id;
             public uint lapic_id;
@@ -293,7 +317,7 @@ namespace Kernel
             public ulong extra_argument;
         }
 
-        public unsafe struct stivale2_struct_tag_smp
+        public struct stivale2_struct_tag_smp
         {
             public stivale2_tag tag;
             public ulong flags;
@@ -305,7 +329,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_PXE_SERVER_INFO = 0x29d1e96239247032;
 
-        public unsafe struct stivale2_struct_tag_pxe_server_info
+        public struct stivale2_struct_tag_pxe_server_info
         {
             public stivale2_tag tag;
             public uint server_ip;
@@ -313,7 +337,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_MMIO32_UART = 0xb813f9b8dbc78797;
 
-        public unsafe struct stivale2_struct_tag_mmio32_uart
+        public struct stivale2_struct_tag_mmio32_uart
         {
             public stivale2_tag tag;
             public ulong addr;
@@ -321,7 +345,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_DTB = 0xabb29bd49a2833fa;
 
-        public unsafe struct stivale2_struct_tag_dtb
+        public struct stivale2_struct_tag_dtb
         {
             public stivale2_tag tag;
             public ulong addr;
@@ -330,7 +354,7 @@ namespace Kernel
 
         public static ulong STIVALE2_STRUCT_TAG_VMAP = 0xb0ed257db18cb58f;
 
-        public unsafe struct stivale2_struct_vmap
+        public struct stivale2_struct_vmap
         {
             public stivale2_tag tag;
             public ulong addr;

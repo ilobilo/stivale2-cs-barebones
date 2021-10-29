@@ -5,10 +5,15 @@ extern _ZN6kernel6Kernel7ProgramM_0_8RealMain_Rv_P1PV26stivale2#2Bstivale2_struc
 
 section .data
 
+stivale2_smp_tag:
+    dq 0x1ab015085f3273df
+    dq 0
+    dq 0
+
 ; Framebuffer
 stivale2_framebuffer_tag:
     dq 0x3ecc1bc43d0f7971
-    dq 0
+    dq stivale2_smp_tag
     dw 0
     dw 0
     dw 32
@@ -16,7 +21,7 @@ stivale2_framebuffer_tag:
 ; Text mode
 stivale2_any_video_tag:
     dq 0xc75c9fa92a44c4db
-    dq 0
+    dq stivale2_smp_tag
     dq 1
 
 ; Kernel stack
