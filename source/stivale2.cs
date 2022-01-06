@@ -15,7 +15,6 @@ namespace Kernel
 
                 current_tag = (stivale2_tag*)current_tag->next;
             }
-            return null;
         }
 
         [StructLayout(LayoutKind.Sequential)]
