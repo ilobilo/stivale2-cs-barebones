@@ -38,7 +38,7 @@ stivale_hdr:
     dq kmain
     dq stack_top
     dq (1 << 1)
-    ; Replace this with "stivale2_framebuffer_tag" to enable framebuffer
+    ; Replace this with "dq stivale2_framebuffer_tag" to enable framebuffer
     dq stivale2_any_video_tag
 
 section .text

@@ -7,10 +7,9 @@ namespace Kernel
         // Do not remove
         public static void Main()
         {
-            // These lines of code are required
-            // Without them compiler will remove RealMain from kernel
-            stivale2.stivale2_struct* test = null;
-            RealMain(test);
+            // These line is required
+            // Without it compiler will remove RealMain from kernel
+            RealMain(null);
         }
 
         public static stivale2.stivale2_struct_tag_smp *smp_tag;
