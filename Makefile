@@ -9,7 +9,7 @@ bios: limine
 	@$(MAKE) -s -C $(KERNELDIR)/source bios
 
 limine:
-	@git clone https://github.com/limine-bootloader/limine.git --single-branch --branch=latest-binary --depth=1
+	@git clone https://github.com/limine-bootloader/limine.git --branch=v2.0-branch-binary --depth=1
 	@$(MAKE) -C $(KERNELDIR)/limine
 
 clean:
