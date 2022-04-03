@@ -49,3 +49,11 @@ kmain:
 sthrow:
     hlt
     jmp sthrow
+
+_ZN6kernel6Kernel7ProgramM_0_9termwrite_Rv_P3yPcy:
+    mov rax, rcx
+    mov rdi, rdx
+    mov rsi, r8
+    call rax
+    ret
+[GLOBAL _ZN6kernel6Kernel7ProgramM_0_9termwrite_Rv_P3yPcy]
