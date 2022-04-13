@@ -9,7 +9,7 @@ namespace Kernel
         // Do not remove
         public static void Main()
         {
-            // These line is required
+            // This line is required
             // Without it compiler will remove RealMain from kernel
             RealMain(null);
         }
