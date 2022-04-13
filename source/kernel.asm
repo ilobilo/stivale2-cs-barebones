@@ -1,6 +1,6 @@
 [EXTERN _ZN6kernel6Kernel7ProgramM_0_8RealMain_Rv_P1PV26stivale2#2Bstivale2_struct]
 
-section .data
+[SECTION .data]
 stivale2_smp_tag:
     dq 0x1ab015085f3273df
     dq 0
